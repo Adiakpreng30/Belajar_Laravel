@@ -16,7 +16,7 @@ class MatakuliahController extends Controller
         if ($kode == 'ST445') {
             return view('matakuliah.show');
         }else {
-            return "Masukkan kode matakuliah";
+            return "Masukkan nvskhbjgbjfb kode matakuliah";
         }
     }
 }
