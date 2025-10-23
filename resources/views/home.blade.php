@@ -11,6 +11,7 @@
     {{-- Bootstrap 5 CSS dari CDN untuk styling --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('assets/css/custom-style.css') }}">
 </head>
 
 <body>
@@ -18,7 +19,7 @@
     {{-- Bagian Navigasi --}}
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="/">NamaProyek</a>
+            <img src="{{ asset('assets/images/logo.png') }}" class="logo-navbar" alt="Logo">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -48,14 +49,14 @@
         {{-- Hero Section / Jumbotron --}}
         <div class="p-5 mb-4 bg-light rounded-3 text-center">
             <div class="container-fluid py-5">
-                {{-- <h1 class="display-5 fw-bold">{{ $username }}</h1>
-                <p class="fs-4 col-md-8 mx-auto">{{ $last_login }}</p> --}}
+                <h1 class="font-custom">Sayaaaaaaaaaaaang</h1>
                 <a href="#" class="btn btn-primary btn-lg mt-3">Pelajari Lebih Lanjut</a>
             </div>
         </div>
 
         {{-- Features Section --}}
         <div class="row text-center">
+
             <h2 class="mb-4">Fitur Unggulan Kami</h2>
 
             {{-- Fitur 1 --}}
@@ -85,11 +86,25 @@
                                 </ul>
                             </div>
                         @endif
+
+                        @if (session('info'))
+                            <div class="alert alert-info">
+                                {!! session('info') !!}
+                            </div>
+                        @endif
+
+                        {{-- @if (session('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ session('success') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        @endif --}}
                         <form action="{{ route('question.store') }}" method="POST">
                             @csrf
                             <div class="mb-3">
                                 <label for="nama" class="form-label">Nama</label>
-                                <input type="text" name="nama" class="form-control" value="{{old('nama')}}">
+                                <input type="text" name="nama" class="form-control" value="{{ old('nama') }}">
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>

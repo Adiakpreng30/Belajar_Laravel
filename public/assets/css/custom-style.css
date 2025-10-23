@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('../fonts/PlaywriteDESAS-Light.ttf');
+}
+.font-custom {
+    font-family: 'MyCustomFont';
+}
+.logo-navbar {
+    height: 40px;
+    width: auto;
+}

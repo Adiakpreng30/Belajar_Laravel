@@ -27,25 +27,40 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-        $data['nama']=$request->nama;
-        $data['email']=$request->email;
-        $data['pertanyaan']=$request->pertanyaan;
-
-        $request->validate([
-		    'nama'  => 'required|max:10',
-		    'email' => ['required','email'],
-		    'pertanyaan' => 'required|max:300|min:8',
-		],[
-            'nama.required' => 'Nama tidak boleh kosong',
-            'nama.max' => 'Nama maksimal 10 karakter',
-            'email.required' => 'email tidak boleh kosong',
-            'pertanyaan.required' => 'pertanyaan tidak boleh kosong',
-            'pertanyaan.min' => 'pertanyaan minimal 8 karakter',
-            'email.email' => 'Format email tidak valid',
+        $validatedData = $request->validate([
+            'nama'       => 'required|max:50',
+            'email'      => ['required', 'email'],
+            'pertanyaan' => 'required|max:300|min:3',
+        ], [
+            'nama.required'       => 'Nama tidak boleh kosong',
+            'nama.max'            => 'Nama maksimal 50 karakter',
+            'email.required'      => 'Email tidak boleh kosong',
+            'pertanyaan.required' => 'Pertanyaan tidak boleh kosong',
+            'pertanyaan.min'      => 'Pertanyaan minimal 3 karakter',
+            'email.email'         => 'Format email tidak valid',
         ]);
 
-        return view('home-question-respon', $data);
+        $nama       = $validatedData['nama'];
+        $pertanyaan = $validatedData['pertanyaan'];
+        $email      = $validatedData['email'];
+
+        // return redirect()->route('home');
+        // return redirect()->back();
+        // return redirect()->away('https://pcr.ac.id');
+return redirect()->route('home')->with('info', 'berhasil dikirim');
+
+
+
+
+        // $pesan = "Terimakasih {$nama}! Pertanyaan Anda: '{$pertanyaan}' akan segera direspon melalui email {$email}";
+
+        // // Redirect kembali dengan membawa pesan yang sudah dirangkai
+        // return redirect()->back()->with('success', $pesan);
+        //  return view('home-question-respon',compact('validatedData'));
+        // return redirect()->away('https://pcr.ac.id');
+
+        // return redirect()->back();
+        // return redirect()->back()->with('success', 'Yeaaaaay berhasil');
     }
 
     /**
